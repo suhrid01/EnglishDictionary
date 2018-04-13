@@ -1,7 +1,10 @@
 import json,difflib
 from difflib import get_close_matches
+from win32com.client import Dispatch
 
-data=json.load(open("Your folder address/data.json"))
+speak = Dispatch("SAPI.SpVoice")
+
+data=json.load(open("Your folder path/data.json"))
 
 def meaning(word):
     word=word.lower()
@@ -31,5 +34,7 @@ output=meaning(word)
 if type(output)==list:
     for item in output:
         print(item)
+        speak.Speak(item)
 else:
     print(output)
+    speak.Speak(output)
